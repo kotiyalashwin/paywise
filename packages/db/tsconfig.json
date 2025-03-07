@@ -1,0 +1,6 @@
+{
+  //use react.json for frontend but db is backend so base.json
+  "extends": "@repo/typescript-config/base.json",
+  "include": ["src"],
+  "exclude": ["dist", "build", "node_modules"]
+}

@@ -13,6 +13,8 @@ model User {
   name        String? 
   number      String  @unique
   password    String
+  transactions OnRampTransaction[]
+  balance   Balances[]
 }
 
 model Merchant {
@@ -22,7 +24,33 @@ model Merchant {
   auth_type   AuthType   
 }
 
+
+model OnRampTransaction{
+  id Int @id @default(autoincrement())
+  status OnRampTransactionStatus
+  userId Int @unique
+  token String   @unique
+  provider String   //what provider like UPI/Gpay/Phone this is very dynamic
+  amount Int
+  startTime DateTime
+  user User @relation(fields: [userId],references: [id])
+}
+
+model Balances {
+  id Int @id @default(autoincrement())
+  amount Int
+  userId Int @unique
+  locked Int
+  user User @relation(fields: [userId],references: [id])
+}
+
 enum AuthType {
   Google
   Github
+}
+
+enum OnRampTransactionStatus {
+  Success
+  Pending
+  Failed
 }

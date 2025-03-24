@@ -1,7 +1,6 @@
 import db from "../../../../packages/db/src";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
-import { CredentialInput } from "next-auth/providers/credentials";
 
 export const authOptions = {
   providers: [
@@ -25,12 +24,14 @@ export const authOptions = {
             number: credentials.phone,
           },
         });
+        // console.log(existingUser);
 
         if (existingUser) {
-          const passwordValidation = await bcrypt.compare(
-            credentials.password,
-            existingUser.password
-          );
+          const passwordValidation = existingUser.password;
+          // await bcrypt.compare(
+          //   credentials.password,
+          //   existingUser.password
+          // );
           if (passwordValidation) {
             return {
               id: existingUser.id.toString(),

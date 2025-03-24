@@ -9,7 +9,7 @@ app.post("/hdfcwebhook", async (req, res) => {
   const paymentInfor = {
     token: req.body.token,
     userId: Number(req.body.user_identifier),
-    amount: req.body.amount,
+    amount: Number(req.body.amount),
   };
 
   //either both of the following happen or none happens -> use PrismaTransactions
@@ -40,8 +40,13 @@ app.post("/hdfcwebhook", async (req, res) => {
       message: "captured",
     });
   } catch (e) {
+    console.log(e);
     res.status(411).json({
       message: "transaction failed",
     });
   }
+});
+
+app.listen(3003, () => {
+  console.log("Running webhok");
 });

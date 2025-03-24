@@ -3,10 +3,12 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../../lib/auth";
 import { AddMoney } from "../../../components/AddMoney";
 import { BalanceCard } from "../../../components/BalanceCard";
+import { useState } from "react";
 import {
   OnRampTransactions,
   OnRampTransactionStatus,
 } from "../../../components/OnRampTransaction";
+import { createOnRampTransaction } from "../../lib/actions/createOnRampTransaction";
 
 //GET BALANCE FROM DB
 async function getBalance() {
@@ -22,6 +24,7 @@ async function getBalance() {
     locked: balance?.locked || 0,
   };
 }
+
 //GET TRANSACTIONS FROM DB and return {time,amount,status,provider}
 async function getOnRampTransactions() {
   const session = await getServerSession(authOptions);
@@ -30,6 +33,7 @@ async function getOnRampTransactions() {
       userId: Number(session?.user?.id),
     },
   });
+  // console.log(txns);
 
   return txns.map((txn) => ({
     time: txn.startTime,
@@ -41,6 +45,7 @@ async function getOnRampTransactions() {
 
 export default async function () {
   const balance = await getBalance();
+  // console.log(balance);
   const transactions = await getOnRampTransactions();
   return (
     <div className="w-screen">

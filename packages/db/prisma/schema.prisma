@@ -28,7 +28,7 @@ model Merchant {
 model OnRampTransaction{
   id Int @id @default(autoincrement())
   status OnRampTransactionStatus
-  userId Int @unique
+  userId Int 
   token String   @unique
   provider String   //what provider like UPI/Gpay/Phone this is very dynamic
   amount Int

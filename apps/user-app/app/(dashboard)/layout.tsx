@@ -1,5 +1,4 @@
 // SIDEBAR
-
 import { SideBarItem } from "../../components/SideBarItem";
 
 export default function Layout({
@@ -27,6 +26,7 @@ export default function Layout({
             href={"/transfer"}
             icon={<TransferIcon />}
           />
+          <SideBarItem title="P2P Transfer" href={"/p2p"} icon={<P2PIcon />} />
         </div>
       </div>
       {/* Other content */}
@@ -88,6 +88,26 @@ function TransactionsIcon() {
         stroke-linejoin="round"
         d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
       />
+    </svg>
+  );
+}
+
+function P2PIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      className="lucide lucide-move-up-right"
+    >
+      <path d="M13 5H19V11" />
+      <path d="M19 5L5 19" />
     </svg>
   );
 }

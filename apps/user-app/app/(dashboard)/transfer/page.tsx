@@ -3,12 +3,10 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../../lib/auth";
 import { AddMoney } from "../../../components/AddMoney";
 import { BalanceCard } from "../../../components/BalanceCard";
-import { useState } from "react";
 import {
   OnRampTransactions,
   OnRampTransactionStatus,
 } from "../../../components/OnRampTransaction";
-import { createOnRampTransaction } from "../../lib/actions/createOnRampTransaction";
 
 //GET BALANCE FROM DB
 async function getBalance() {

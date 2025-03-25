@@ -6,10 +6,14 @@ app.use(express.json());
 
 app.post("/hdfcwebhook", async (req, res) => {
   //zod validations
-  const paymentInfor = {
+  const paymentInfor: {
+    token: string;
+    userId: string;
+    amount: string;
+  } = {
     token: req.body.token,
-    userId: Number(req.body.user_identifier),
-    amount: Number(req.body.amount),
+    userId: req.body.user_identifier,
+    amount: req.body.amount,
   };
 
   //either both of the following happen or none happens -> use PrismaTransactions
@@ -18,11 +22,11 @@ app.post("/hdfcwebhook", async (req, res) => {
     await db.$transaction([
       db.balances.update({
         where: {
-          userId: paymentInfor.userId,
+          userId: Number(paymentInfor.userId),
         },
         data: {
           amount: {
-            increment: paymentInfor.amount,
+            increment: Number(paymentInfor.amount),
           },
         },
       }),
